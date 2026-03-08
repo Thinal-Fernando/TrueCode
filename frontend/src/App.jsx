@@ -1,6 +1,12 @@
 import { useState } from "react";
 import "./App.css";
-import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/react";
+import {
+  Show,
+  SignInButton,
+  SignOutButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/react";
 
 function App() {
   return (
@@ -8,8 +14,11 @@ function App() {
       <h1>Welcome to the App</h1>
       <header>
         <Show when="signed-out">
-          <SignInButton />
-          <SignUpButton />
+          <SignInButton mode="modal" />
+          <SignUpButton mode="modal" />
+        </Show>
+        <Show when="signed-in">
+          <SignOutButton />
         </Show>
         <Show when="signed-in">
           <UserButton />
