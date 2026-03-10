@@ -47,7 +47,19 @@ export async function createSession(req, res) {
   }
 }
 
-export async function getActiveSessions(req, res) {}
+export async function getActiveSessions(req, res) {
+  try {
+    const sessions = await Session.find({ status: "active" }) // find all avtive sessions
+      .populate("host", "name profileImage email clerkId") // replace host objectId with the host users data
+      .sort({ createdAt: -1 }) // order the sessions in desc
+      .limit(20);
+
+    res.status(200).json({ sessions });
+  } catch (error) {
+    console.log("Error in getActiveSessions controller:", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
 
 export async function getMyRecentSessions(req, res) {}
 
