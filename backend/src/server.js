@@ -5,6 +5,8 @@ import { connectDB } from "./lib/db.js";
 import { inngest, functions } from "./lib/innges.js";
 import { serve } from "inngest/express";
 import cors from "cors";
+import { clerkMiddleware } from "@clerk/express";
+import { protectRoute } from "./middleware/protectRoute.js";
 
 const app = express();
 
@@ -14,14 +16,17 @@ const __dirname = path.resolve();
 app.use(express.json());
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 
+app.use(clerkMiddleware()); //this adds auth field to request object (contains session and user ids)
+
 app.use("/api/inngest", serve({ client: inngest, functions }));
 
 app.get("/health", (req, res) => {
   res.status(200).json({ msg: "success from api" });
 });
 
-app.get("/books", (req, res) => {
-  res.status(200).json({ msg: "this is the books end point" });
+app.get("/books", protectRoute, (req, res) => {
+  // we pass a array of middleware to express, which flattens it and runs it one by one
+  res.status(200).json({ msg: "this is a protected route" });
 });
 
 //making app ready for deployment
