@@ -1,5 +1,5 @@
 import Session from "../models/Session.js";
-import { streamClient, chatClient } from "@stream-io/node-sdk";
+import { chatClient, streamClient } from "../lib/stream.js";
 
 export async function createSession(req, res) {
   try {
@@ -144,20 +144,21 @@ export async function endSession(req, res) {
 
     if (!session) return res.status(404).json({ message: "Session not found" });
 
-    
-    if (session.host.toString() !== userId.toString()) { //checking if user is the host
-      return res.status(403).json({ message: "Only the host can end the session" });
+    if (session.host.toString() !== userId.toString()) {
+      //checking if user is the host
+      return res
+        .status(403)
+        .json({ message: "Only the host can end the session" });
     }
 
-    if (session.status === "completed") {    //checking if session is already completed
+    if (session.status === "completed") {
+      //checking if session is already completed
       return res.status(400).json({ message: "Session is already completed" });
     }
 
-    
     const call = streamClient.video.call("default", session.callId);
     await call.delete({ hard: true });
 
-    
     const channel = chatClient.channel("messaging", session.callId); //deleting stream chat channel
     await channel.delete();
 
@@ -169,4 +170,4 @@ export async function endSession(req, res) {
     console.log("Error in endSession controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
   }
-} 
+}
