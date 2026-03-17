@@ -29,7 +29,8 @@ function ProblemPage() {
     }
   }, [id, selectedLanguage]);
 
-  const handleLanguageChange = (e) => {};
+  const handleProblemChange = (newProblemId) =>
+    navigate(`/problem/${newProblemId}`);
 
   return (
     <div className="h-screen bg-base-100 flex flex-col">
