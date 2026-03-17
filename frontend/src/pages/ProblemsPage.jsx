@@ -1,5 +1,13 @@
+import Navbar from "../components/Navbar.jsx/Navbar";
+
 function ProblemsPage() {
-  return <>Problem</>;
+  return (
+    <>
+      <div>
+        <Navbar />
+      </div>
+    </>
+  );
 }
 
 export default ProblemsPage;
