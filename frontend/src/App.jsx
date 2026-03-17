@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 import {
   Show,
   SignInButton,
@@ -11,7 +10,9 @@ import {
 function App() {
   return (
     <>
-      <h1>Welcome to the App</h1>
+      <h1 className="text-red-700 bg-orange-400 p-10 text-3xl">
+        Welcome to the App
+      </h1>
       <header>
         <Show when="signed-out">
           <SignInButton mode="modal" />
