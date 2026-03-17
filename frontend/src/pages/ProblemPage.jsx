@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar.jsx/Navbar";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import OutputPanel from "../components/Navbar.jsx/OutputPanel";
 import CodeEditorPanel from "../components/Navbar.jsx/CodeEditorPanel";
+import ProblemDescription from "../components/Navbar.jsx/ProblemDescription";
 
 function ProblemPage() {
   const { id } = useParams();
@@ -36,7 +37,14 @@ function ProblemPage() {
       <div className="flex-1">
         <PanelGroup direction="horizontal">
           {/*left panel for problem desc*/}
-          <Panel defaultSize={40} minSize={30}></Panel>
+          <Panel defaultSize={40} minSize={30}>
+            <ProblemDescription
+              problem={currentProblem}
+              currentProblemId={currentProblemId}
+              onProblemChange={handleProblemChange}
+              allProblems={Object.values(PROBLEMS)}
+            />
+          </Panel>
 
           <PanelResizeHandle className="w-2 bg-base-300 hover:bg-primary transition-colors cursor-col-resize" />
 
