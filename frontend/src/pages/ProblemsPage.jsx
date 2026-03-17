@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar.jsx/Navbar";
 import { PROBLEMS } from "../data/problems";
 import { Link } from "react-router";
 import { Code2Icon, ChevronRightIcon } from "lucide-react";
+import { getDifficultyBadgeClass } from "../lib/utils";
 
 function ProblemsPage() {
   const problems = Object.values(PROBLEMS);
@@ -39,7 +40,11 @@ function ProblemsPage() {
                             <h2 className="text-xl font-bold">
                               {problem.title}
                             </h2>
-                            <span>{problem.difficulty}</span>
+                            <span
+                              className={`badge ${getDifficultyBadgeClass(problem.difficulty)}`}
+                            >
+                              {problem.difficulty}
+                            </span>
                           </div>
                           <p className="text-sm text-base-content/60">
                             {" "}
