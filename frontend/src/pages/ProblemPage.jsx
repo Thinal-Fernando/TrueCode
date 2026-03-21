@@ -32,6 +32,10 @@ function ProblemPage() {
   const handleProblemChange = (newProblemId) =>
     navigate(`/problem/${newProblemId}`);
 
+  const handleLanguageChange = (e) => {};
+
+  const handleRunCode = () => {};
+
   return (
     <div className="h-screen bg-base-100 flex flex-col">
       <Navbar />
@@ -53,7 +57,14 @@ function ProblemPage() {
           <Panel defaultSize={40} minSize={30}>
             <PanelGroup direction="vertical">
               <Panel defaultSize={70} minSize={30}>
-                <CodeEditorPanel />
+                <CodeEditorPanel
+                  selectedLanguage={selectedLanguage}
+                  code={code}
+                  iseRunning={isRunning}
+                  onLanguageChange={handleLanguageChange}
+                  onCodeChange={setCode}
+                  onRunCode={handleRunCode}
+                />
               </Panel>
               <PanelResizeHandle className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
 
