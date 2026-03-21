@@ -103,7 +103,7 @@ function ProblemPage() {
               <PanelResizeHandle className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
 
               <Panel defaultSize={30} minSize={30}>
-                <OutputPanel />
+                <OutputPanel output={output} />
               </Panel>
             </PanelGroup>
           </Panel>
