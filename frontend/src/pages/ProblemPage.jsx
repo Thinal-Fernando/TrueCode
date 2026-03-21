@@ -6,6 +6,8 @@ import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import OutputPanel from "../components/Navbar.jsx/OutputPanel";
 import CodeEditorPanel from "../components/Navbar.jsx/CodeEditorPanel";
 import ProblemDescription from "../components/Navbar.jsx/ProblemDescription";
+import toast from "react-hot-toast";
+import { executeCode } from "../lib/piston";
 
 function ProblemPage() {
   const { id } = useParams();
@@ -32,9 +34,41 @@ function ProblemPage() {
   const handleProblemChange = (newProblemId) =>
     navigate(`/problem/${newProblemId}`);
 
-  const handleLanguageChange = (e) => {};
+  const checkIfTestsPassed = (actualOutput, expectedOutput) => {
+    return actualOutput == expectedOutput;
+  };
 
-  const handleRunCode = () => {};
+  const handleLanguageChange = (e) => {
+    const newLang = e.target.value;
+    setSelectedLanguage(newLang);
+    setCode(currentProblem.starterCode[newLang]);
+    setOutput(null);
+  };
+
+  const handleRunCode = async () => {
+    setIsRunning(true);
+    setOutput(null);
+
+    const result = await executeCode(selectedLanguage, code);
+    setOutput(result);
+    setIsRunning(false);
+
+    // check if code executed successfully and matches expected output
+
+    if (result.success) {
+      const expectedOutput = currentProblem.expectedOutput[selectedLanguage];
+      const testsPassed = checkIfTestsPassed(result.output, expectedOutput);
+
+      if (testsPassed) {
+        triggerConfetti();
+        toast.success("All tests passed! Great job!");
+      } else {
+        toast.error("Tests failed. Check your output!");
+      }
+    } else {
+      toast.error("Code execution failed!");
+    }
+  };
 
   return (
     <div className="h-screen bg-base-100 flex flex-col">
