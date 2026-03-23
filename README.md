@@ -218,7 +218,35 @@ Through this project I practiced:
 
 ## Demo
 
-![Home page](assets/homepage)
+<p align="center">
+  <img src="assets/homepage.png" alt="Home page" width="700"/>
+  <br>Home Page
+</p>
+<br>
+<p align="center">
+  <img src="assets/dashboard.png" alt="dashboard" width="700"/>
+  <br>User Dashboard
+</p>
+<br>
+<p align="center">
+  <img src="assets/problemspage.png" alt="problems list" width="700"/>
+  <br>List of Problems
+</p>
+<br>
+<p align="center">
+  <img src="assets/problem.png" alt="problem" width="700"/>
+  <br>Problem Editor
+</p>
+<br>
+<p align="center">
+  <img src="assets/interviewpage.png" alt="interview" width="700"/>
+  <br>Interview
+</p>
+<br>
+<p align="center">
+  <img src="assets/chat.png" alt="chat" width="700"/>
+  <br>Chat application
+</p>
 
 
 ---
