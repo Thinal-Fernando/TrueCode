@@ -1,3 +1,5 @@
+import { chatClient } from "../lib/stream.js";
+
 export async function getStreamToken(req, res) {
   try {
     const token = chatClient.createToken(req.user.clerkId); // use the clerkid no mongo -> to match id in stream dashboard
