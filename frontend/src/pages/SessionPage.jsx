@@ -17,6 +17,7 @@ import OutputPanel from "../components/Navbar.jsx/OutputPanel";
 import Navbar from "../components/Navbar.jsx/Navbar";
 import useStreamClient from "../hooks/useStreamClient";
 import VideoCallUI from "../components/Navbar.jsx/VideoCallUI";
+import { StreamCall, StreamVideo } from "@stream-io/video-react-sdk";
 
 function SessionPage() {
   const navigate = useNavigate();
