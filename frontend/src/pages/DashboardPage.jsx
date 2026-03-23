@@ -10,6 +10,9 @@ import {
 import Navbar from "../components/Navbar.jsx/Navbar";
 import WelcomeSection from "../components/Navbar.jsx/WelcomeSection";
 import CreateSessionModal from "../components/Navbar.jsx/CreateSessionModal";
+import StatsCards from "../components/Navbar.jsx/StatsCards";
+import ActiveSessions from "../components/Navbar.jsx/ActiveSessions";
+import RecentSessions from "../components/Navbar.jsx/RecentSessions";
 
 function DashboardPage() {
   const navigate = useNavigate();
@@ -58,6 +61,25 @@ function DashboardPage() {
       <div className="min-h-screen bg-base-300">
         <Navbar />
         <WelcomeSection onCreateSession={() => setShowCreateModal(true)} />
+
+        <div className="container mx-auto px-6 pb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <StatsCards
+              activeSessionsCount={activeSessions.length}
+              recentSessionsCount={recentSessions.length}
+            />
+            <ActiveSessions
+              sessions={activeSessions}
+              isLoading={loadingActiveSessions}
+              isUserInSession={isUserInSession}
+            />
+          </div>
+
+          <RecentSessions
+            sessions={recentSessions}
+            isLoading={loadingRecentSessions}
+          />
+        </div>
       </div>
 
       <CreateSessionModal
