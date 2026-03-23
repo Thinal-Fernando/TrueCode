@@ -24,7 +24,7 @@ export async function createSession(req, res) {
       callId,
     });
 
-    await StreamClient.video.call("default", callId).getOrCreate({
+    await streamClient.video.call("default", callId).getOrCreate({
       //creating a stream video call
       data: {
         created_by_id: clerkId,
